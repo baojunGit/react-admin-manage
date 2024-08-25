@@ -30,14 +30,6 @@ const VerticalMenu = () => {
 		setOpenKeys([pathArray[0]]);
 	}, [pathname]);
 
-	// 菜单展开/关闭的回调函数
-	const onOpenChange = (keys: string[]) => {
-		// 如果 collapse 为 true，不做任何操作
-		if (!collapse) {
-			setOpenKeys(keys);
-		}
-	};
-
 	// 菜单点击时导航
 	const goPage = ({ key, keyPath }) => {
 		// console.log(keyPath);
@@ -64,11 +56,10 @@ const VerticalMenu = () => {
 			mode="inline"
 			theme="light"
 			items={menu}
-			onOpenChange={onOpenChange}
+			// 菜单展开/关闭的回调函数
+			onOpenChange={keys => setOpenKeys(keys)}
 			openKeys={openKeys}
 			selectedKeys={selectedKeys}
-			// SubMenu 展开/关闭的触发行为
-			triggerSubMenuAction="click"
 			onClick={goPage}
 			// inline 时菜单是否收起状态
 			inlineCollapsed={collapse}
