@@ -10,7 +10,9 @@ export const formatMenu = routeList => {
 	for (let r of routeList) {
 		// 去掉layout，不在侧边栏显示
 		if (r?.name === 'layout') r = r?.children[0];
-		const icon = r.icon ? <i className={r.icon}></i> : null;
+		const icon = r.icon ? (
+			<i style={{ fontSize: '18px' }} className={r.icon}></i>
+		) : null;
 		rNew = {
 			label: r?.name,
 			key: r.path,
@@ -61,8 +63,8 @@ export const getRouteItem = (arr, queryPath) => {
  */
 export const getOpenKeys = (path: string) => {
 	let newStr: string = '';
-	let newArr: any[] = [];
-	let arr = path.split('/').map(i => '/' + i);
+	const newArr: any[] = [];
+	const arr = path.split('/').map(i => '/' + i);
 	for (let i = 1; i < arr.length - 1; i++) {
 		newStr += arr[i];
 		newArr.push(newStr);

@@ -15,9 +15,9 @@ const Redirect = () => {
 
 		// 使用 navigate 进行重定向
 		navigate(`${finalPath}${search}`, { replace: true });
-	}, [location, navigate]);
+	}, [location]);
 
-	return <div>redirect 11111</div>;
+	return <div></div>;
 };
 
 export default Redirect;

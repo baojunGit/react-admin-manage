@@ -23,8 +23,8 @@ const VerticalMenu = () => {
 		setSelectedKeys(pathArray);
 
 		// 获取当前路径的展开项
-		setOpenKeys(collapse ? [] : [pathArray[0]]);
-	}, [pathname, collapse]);
+		setOpenKeys([pathArray[0]]);
+	}, [pathname]);
 
 	// 菜单展开/关闭的回调函数
 	const onOpenChange = (keys: string[]) => {
@@ -63,8 +63,11 @@ const VerticalMenu = () => {
 			onOpenChange={onOpenChange}
 			openKeys={openKeys}
 			selectedKeys={selectedKeys}
+			// SubMenu 展开/关闭的触发行为
 			triggerSubMenuAction="click"
 			onClick={goPage}
+			// inline 时菜单是否收起状态
+			inlineCollapsed={collapse}
 		/>
 	);
 };

@@ -1,41 +1,38 @@
-import React from 'react';
 import Layout from '@/Layout';
 
-// 用于静态导入的组件映射表
-const componentMap = {
-	Home: () => import('@/views/Home/index.tsx'),
-	'System/User': () => import('@/views/system/User/index.tsx'),
-	'System/Role': () => import('@/views/system/Role/index.tsx'),
-	'System/Menu': () => import('@/views/system/Menu/index.tsx'),
-	'System/Dict': () => import('@/views/system/Dict/index.tsx'),
-	'Case/Hover': () => import('@/views/case/Hover/index.tsx'),
-	'Case/DataView': () => import('@/views/case/DataView/index.tsx'),
-	'Case/LoadingModule': () => import('@/views/case/LoadingModule/index.tsx'),
-	Error: () => import('@/views/error/index.tsx'),
-	'Error/401': () => import('@/views/error/Error401/index.tsx'),
-	'Error/404': () => import('@/views/error/Error404/index.tsx'),
-	'Iframe/React': () => import('@/views/iframe/React/index.tsx')
-};
-
+// 使用 import.meta.glob 动态导入组件并立即解析
+const modules = import.meta.glob('../views/**/index.tsx', { eager: true });
+// 动态格式化路由配置
 export const formatRouter = menuList => {
+	// const、let 和 var 这些关键字不能直接在 case 语句块中使用，因为 case 语句块并不会创建新的作用域
 	const routes = [];
 	let rNew;
 	let Component;
+	let componentPath;
+	let module;
 
 	for (const r of menuList) {
 		switch (r.component) {
-			case 'layout':
-				Component = <Layout />;
+			case 'Layout':
+				Component = Layout;
 				break;
 			default:
-				// 使用静态导入，根据映射表中的路径导入组件
-				Component = React.createElement(React.lazy(componentMap[r.component]));
+				// 使用动态导入，根据组件路径加载组件
+				componentPath = `../views/${r.component}/index.tsx`;
+				module = modules[componentPath];
+				console.log(module);
+				if (module) {
+					Component = module.default;
+				} else {
+					console.error(`Component at ${componentPath} not found`);
+					continue;
+				}
 		}
 
 		rNew = {
 			path: r.path,
 			name: r.name,
-			element: Component
+			element: <Component />
 		};
 
 		if (r.children) {
