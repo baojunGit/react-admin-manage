@@ -20,7 +20,7 @@ const VerticalMenu = () => {
 		const path = pathname.slice(1);
 		// 将路径字符串根据斜杠分割成数组
 		const pathArray = path.split('/');
-		// 如果是重定向地址，就不要刷新重新设置侧边栏
+		// 如果是重定向地址，就不要重新设置侧边栏，会闪烁
 		if (pathArray.includes('redirect')) {
 			return;
 		}
