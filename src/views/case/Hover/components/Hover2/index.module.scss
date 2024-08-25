@@ -1,0 +1,45 @@
+.hover2 {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  .item {
+    position: relative;
+    box-sizing: border-box;
+    width: 280px;
+    height: 220px;
+    background: #f1f5f8;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: $base-transition;
+    // 这里用after伪元素，用before伪元素会跟阿里字体图标冲突
+    ::after {
+      transition: $base-transition;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      border-bottom: 2px solid #409eff;
+    }
+    i {
+      font-size: 40px;
+      color: #409eff;
+    }
+    h6 {
+      margin: 18px 0;
+      font-size: 16px;
+    }
+    p {
+      color: #969699;
+    }
+    &:hover {
+      transform: translateY(-10px) scale(1.01);
+      box-shadow: 0 0 5px #cfcfcf;
+      ::after {
+        width: 100%;
+      }
+    }
+  }
+}

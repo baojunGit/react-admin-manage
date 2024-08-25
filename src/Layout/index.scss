@@ -1,0 +1,166 @@
+@mixin sidebar-style($width, $position: relative) {
+  // 侧边栏
+  .app-sidebar {
+    height: 100%;
+    transition: wdith 0.28s;
+    width: $width;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    .sidebar-logo {
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      // 空间不足换行
+      flex-wrap: wrap;
+      i {
+        font-size: 34px;
+        font-weight: 700;
+        line-height: 50px;
+        color:#1890ff;
+      }
+      h3 {
+        font-size: 20px;
+        line-height: 50px;
+        font-weight: 700;
+        color: #1890ff;
+      }
+    }
+    .vertical-menu {
+      flex: 1;
+      // 高度不能超过，不然会把顶部的logo遮住了
+      max-height: calc(100% - 50px);
+      // 超出不隐藏，滚动条效果
+      overflow: auto;
+    }
+  }
+
+  // 主体内容区域
+  .app-main {
+    flex: 1;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    // 当我们设置父元素flex-direction为column后，
+    // 他的子元素如果我们没有设置具体宽度，所有的子元素宽度默认是100%了
+    flex-direction: column;
+    .app-nav {
+      box-sizing: border-box;
+      height: $base-nav-height;
+      overflow: hidden;
+      border-bottom: 1px solid #f6f6f6;
+      padding: 0 20px;
+      position: relative;
+      .nav-row {
+        height: 100%;
+        .left-panel {
+          height: 100%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          .hamburger {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-right: 16px;
+            .hamburger-icon {
+              display: inline-block;
+              vertical-align: middle;
+              width: 20px;
+              height: 20px;
+              &.is-active {
+                transform: rotate(180deg);
+              }
+            }
+          }
+        }
+        .right-panel {
+          height: 100%;
+          display: flex;
+          justify-content: flex-end;
+          column-gap: 12px;
+          align-items: center;
+          > div {
+            padding: 4px;
+            cursor: pointer;
+            &:hover {
+              background-color: #f0f0f0;
+            }
+          }
+          .app-notice {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .avatar-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            .avatar {
+              border-radius: 50%;
+            }
+            i {
+              font-size: 14px;
+            }
+          }
+          i {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+    .app-tabs {
+      height: $base-tabs-height;
+      padding: 0 20px;
+    }
+    .app-page {
+      flex: 1;
+      box-sizing: border-box;
+      // 继承扣除padding后的高度
+      padding: $base-page-padding;
+      background: #f2f3f5;
+      overflow: auto;
+      .router-view {
+        background: #fff;
+        > [id*='-container'] {
+          box-sizing: border-box;
+          min-height: $base-page-height;
+          padding: $base-page-padding;
+          transition: $base-transition;
+        }
+      }
+      .page-footer {
+        height: $base-footer-height;
+        border-top: 1px dashed #dcdfe6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fff;
+      }
+    }
+  }
+}
+
+#layout {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  .layout-container {
+    height: 100%;
+    display: flex;
+  }
+  .openSidebar {
+    $width: $base-sidebar-open;
+    @include sidebar-style($width);
+    transition: $base-transition;
+  }
+  .closeSidebar {
+    $width: $base-sidebar-close;
+    @include sidebar-style($width);
+    transition: $base-transition;
+  }
+}

@@ -1,0 +1,32 @@
+.view1 {
+  width: 400px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid hsla(0, 0%, 74.9%, 0.66);
+  border-radius: 12px;
+  main {
+    display: flex;
+  }
+  footer {
+    display: flex;
+    flex-direction: column;
+    .subTitle {
+        padding-left: 20px;
+    }
+    .statistic {
+      display: flex;
+      justify-content: center;
+      column-gap: 60px;
+      .statistic-item {
+        display: flex;
+        column-gap: 4px;
+        // 将内容盒子里面的文字基于第一个文字的底部对齐
+        align-items: baseline;
+        .content-value {
+            font-size: 32px;
+        }
+      }
+    }
+  }
+}

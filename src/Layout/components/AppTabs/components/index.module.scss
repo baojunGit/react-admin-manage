@@ -1,0 +1,54 @@
+.tabs-more {
+  position: relative;
+  box-sizing: border-box;
+  &-icon {
+    display: inline-block;
+    color: #9a9a9a;
+    cursor: pointer;
+    transition: transform 0.3s ease-out;
+    .box {
+      position: relative;
+      display: block;
+      width: 14px;
+      height: 8px;
+      &:before {
+        position: absolute;
+        top: 2px;
+        left: 0;
+        width: 6px;
+        height: 6px;
+        content: '';
+        background: #9a9a9a;
+      }
+      &:after {
+        position: absolute;
+        top: 2px;
+        left: 8px;
+        width: 6px;
+        height: 6px;
+        content: '';
+        background: #9a9a9a;
+      }
+      .box-t {
+        &:before {
+          transition: transform 0.3s ease-out 0.3s;
+        }
+      }
+    }
+  }
+  &-active,
+  &:hover {
+    .tabs-more-icon {
+      transform: rotate(90deg);
+      .box-t {
+        &:before {
+          transform: rotate(45deg);
+        }
+      }
+      .box:before,
+      .box:after {
+        background: #409eff;
+      }
+    }
+  }
+}

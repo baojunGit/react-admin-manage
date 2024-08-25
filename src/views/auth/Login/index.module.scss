@@ -1,0 +1,51 @@
+.login {
+  height: 100%;
+  background: #fff url('~@/assets/images/background.svg') no-repeat 60px 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // 这里为什么增加一层login-container
+  // 解决flex子元素顶部内容被遮住
+  // 给子元素设置margin: auto;来解决，且这种解决方案是在只有一个子元素的情况下才生效。
+  .login-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    .login-header {
+      .header-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .logo {
+          height: 60px;
+          vertical-align: top;
+          margin-right: 16px;
+          border-style: none;
+        }
+        .title {
+          height: 60px;
+          line-height: 60px;
+          font-size: 30px;
+          color: rgba(0, 0, 0, 0.85);
+          font-weight: 600;
+        }
+      }
+      .header-desc {
+        text-align: center;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.45);
+        margin-top: 12px;
+        margin-bottom: 40px;
+      }
+    }
+    // 如果要实现footer一直是贴底部固定距离的，那login页面还是全用定位来做比较方便
+    .login-footer {
+      font-size: 12px;
+      height: 80px;
+      line-height: 80px;
+      text-align: center;
+    }
+  }
+}

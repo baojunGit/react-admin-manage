@@ -1,0 +1,9 @@
+# node_modules 目录
+node_modules/
+
+# 构建输出目录
+dist/
+
+# 静态文件
+**/*.html
+**/*.svg

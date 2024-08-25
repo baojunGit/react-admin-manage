@@ -1,0 +1,46 @@
+.hover1 {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  .item {
+    box-sizing: border-box;
+    width: 420px;
+    height: 180px;
+    padding: 20px;
+    border: 1px solid #e2e9f0;
+    display: flex;
+    transition: $base-transition;
+    .item-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .desc {
+        height: 60px;
+      }
+      .sop {
+        visibility: hidden;
+        .field-desc {
+          margin-right: 20px;
+        }
+        &.hide {
+            visibility: hidden !important;
+        }
+      }
+    }
+    .item-right {
+      width: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .right-icon {
+        font-size: 50px;
+        color: #409eff;
+      }
+    }
+    &:hover {
+      background: #d7effb;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+  }
+}

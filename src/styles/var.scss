@@ -1,0 +1,32 @@
+/**
+ * @description 项目全局样式（styles目录里可以直接使用）
+ */
+
+
+ // 默认页面padding
+$base-page-padding: 20px;
+
+// 默认动画
+// transition-timing-function: cubic-bezier()该属性用于描述属性的中间值。即该两个状态变化的过渡曲线
+$base-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border 0s,
+  color 0.1s, font-size 0s;
+
+// 纵向左侧导航未折叠的宽度
+$base-sidebar-open: 220px;
+
+// 纵向左侧导航已折叠的宽度
+$base-sidebar-close: 80px;
+
+// 顶部nav的高度
+$base-nav-height: 50px;
+
+// 顶部标签页tabs-bar的高度
+$base-tabs-height: 50px;
+
+// app底部footer的高度
+$base-footer-height: 56px;
+
+// 页面主体内容高度
+$base-page-height: calc(
+  100vh - $base-nav-height - $base-tabs-height - $base-footer-height - $base-page-padding * 2
+)

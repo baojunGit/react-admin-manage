@@ -1,0 +1,19 @@
+/* 刷新按钮动画效果 */
+.page-refresh {
+  .refresh-button {
+    // 需要转换成块元素或者行内块元素动画才生效
+    display: inline-block;
+    transition-duration: 600ms;
+    // 参数：定义的动画名称；动画时间；动画以何种运行轨迹完成；规定动画应该无限次播放
+    animation: rotate 600ms linear infinite;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

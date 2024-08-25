@@ -1,0 +1,24 @@
+.back-top {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  z-index: 999;
+  background-color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 6px rgb(0 0 0 / 12%);
+  cursor: pointer;
+  .triangle {
+    width: 0;
+    // 透明边框
+    border: 8px solid transparent;
+    // 除了left都是透明的，就挤成朝向右的箭头
+    border-bottom: 8px solid #409eff;
+    // 被align-items变为向上偏移4px
+    margin-bottom: 8px;
+  }
+}
