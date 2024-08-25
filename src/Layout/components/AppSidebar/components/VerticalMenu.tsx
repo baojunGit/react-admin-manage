@@ -5,71 +5,56 @@ import { useMenuStore } from '@/store';
 import { formatMenu, getOpenKeys, getRouteItem } from './util';
 
 const VerticalMenu = () => {
-	// const menu = [
-	//   {
-	//     label: '首页',
-	//     key: '/home',
-	//     icon: <i className='iconfont icon-index'></i>,
-	//   }, // 菜单项务必填写 key
-	// ];
 	const { menuList, collapse } = useMenuStore();
-
 	const menu = formatMenu(menuList);
-	// 获取当前路径
+
 	const { pathname } = useLocation();
+	const navigate = useNavigate();
 
 	const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname]);
-	const [openKeys, setOpenKeys] = useState<string[]>([]);
+	const [openKeys, setOpenKeys] = useState<string[]>(getOpenKeys(pathname));
 
-	// 刷新页面，当侧边栏不收缩的时候，获取需要展开的subMenu，保持高亮
+	// 当路由改变时，高亮和展开对应的菜单
 	useEffect(() => {
-		setSelectedKeys([pathname]);
-		!collapse && setOpenKeys(getOpenKeys(pathname));
+		// 获取当前页面的路径，并去掉开头的斜杠
+		const path = pathname.slice(1);
+		// 将路径字符串根据斜杠分割成数组
+		const pathArray = path.split('/');
+		setSelectedKeys(pathArray);
+
+		// 获取当前路径的展开项
+		setOpenKeys(collapse ? [] : [pathArray[0]]);
 	}, [pathname, collapse]);
 
-	// 回调参数：所有展开的submenu的key数组
-	const onOpenChange = openKeys => {
-		// 没打开submenu和打开一个的情况
-		if (openKeys.length <= 1) return setOpenKeys(openKeys);
-		// 如果展开的submenu是多个，获取最后一个展开的submenu
-		const latestOpenKey = openKeys[openKeys.length - 1];
-		// 如果展开的最后一个submenu全名包含第一个submenu，证明是嵌套路由
-		if (latestOpenKey.includes(openKeys[0])) return setOpenKeys(openKeys);
-		// 如果展开的最后一个submenu不包含第一个submenu，证明是打开了新类的submenu
-		setOpenKeys([latestOpenKey]);
+	// 菜单展开/关闭的回调函数
+	const onOpenChange = (keys: string[]) => {
+		// 如果 collapse 为 true，不做任何操作
+		if (!collapse) {
+			setOpenKeys(keys);
+		}
 	};
 
-	const navigate = useNavigate();
-	// 回调参数key，keyPath
+	// 菜单点击时导航
 	const goPage = ({ key, keyPath }) => {
+		// console.log(keyPath);
 		const url = '/' + keyPath.reverse().join('/');
+		const externalUrl = keyPath.find(item => item.includes('http'));
 		// 判断是否网址链接，如果是就打开新窗口
-		if (/http(s)?:/.test(url)) {
-			window.open(url, '_blank');
+		if (externalUrl) {
+			window.open(externalUrl, '_blank');
 			return;
 		}
+
 		const { frameSrc } = getRouteItem(menuList, key);
 		if (frameSrc) {
-			// 为什么需要对url进行编码和解码
-			// 1.在 URL 地址中，不允许出现非 ASCII 字符，如果 URL 地址中需要包含中文字符，就必须对中文字符进行编码（转义）
-			// 2.在 URL 参数字符串中用 key=value 这种键值对的形式进行传递参数，多个键值对中间用 & 连接。
-			// 如果在 value 中也存在 & 这个符号的话，不对其进行编码，就会引起歧义。
-
-			// encodeURI() 和 encodeURIComponent()区别
-			// 相同点：都是对 URI 进行编码。
-			// 不同点：encodeURI 通常用于转码整个 URI，而 encodeURIComponent 主要是用来转码 URI 的组成部分（？后面的参数部分）
 			const embeddedUrl = encodeURIComponent(frameSrc);
 			navigate(`${url}?url=${embeddedUrl}`);
 			return;
 		}
 		navigate(url);
 	};
+
 	return (
-		// defaultSelectedKeys	初始选中的菜单项 key 数组
-		// selectedKeys 当前选中的菜单项 key 数组
-		// defaultOpenKey只在刚开始时影响一次，openKey数据变化后就更新，也就是传说中的受控与非受控组件的应用
-		// openKeys 当前展开的 SubMenu 菜单项 key 数组，用于设置只展开一项
-		// onOpenChange SubMenu 展开/关闭的回调
 		<Menu
 			className="vertical-menu"
 			mode="inline"
@@ -80,7 +65,6 @@ const VerticalMenu = () => {
 			selectedKeys={selectedKeys}
 			triggerSubMenuAction="click"
 			onClick={goPage}
-			// inlineCollapsed={!open}
 		/>
 	);
 };
