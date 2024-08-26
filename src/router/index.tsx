@@ -26,7 +26,10 @@ const useRouterInstance = () => {
 				const routes = [
 					...publicRoutes,
 					// 嵌套路由重定向, 在要实现重定向的一级路由声明两次element属性，一个代表当前路径所展示的页面，另一个表示重定向路径。
-					{ path: '/', element: <Navigate to="/home" /> },
+					// to里面用/home和hom都可以，虽然结果一样，表示的意思不同
+					// 1.有斜杠 /：表示绝对路径，重定向到网站的根路径下的 /home
+					// 2.没有斜杠 /：表示相对路径，重定向到当前路径的基础上再加上 home
+					{ path: '/', element: <Navigate to="home" /> },
 					...dynamicRoutes,
 					{
 						path: 'redirect/*',

@@ -47,18 +47,11 @@ export const formatRouter = menuList => {
 
 		// 如果存在子路由且没有设置默认重定向，则添加默认重定向
 		if (rNew.children && rNew.children.length > 0) {
-			// 检查是否已经有默认子路由（例如 path: '' 或 '/')
-			const hasDefaultChild = rNew.children.some(
-				child => child.path === '' || child.path === '/'
-			);
-
-			if (!hasDefaultChild) {
-				// 添加一个默认的重定向子路由
-				rNew.children.unshift({
-					path: '',
-					element: <Navigate to={rNew.children[0].path} />
-				});
-			}
+			rNew.children.unshift({
+				// path为空字符串，表示这个路由的路径与父路由的路径相同
+				path: '',
+				element: <Navigate to={rNew.children[0].path} />
+			});
 		}
 
 		routes.push(rNew);
