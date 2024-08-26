@@ -16,8 +16,8 @@ const Redirect = () => {
 		// 使用 navigate 进行重定向
 		navigate(`${finalPath}${search}`, { replace: true });
 	}, [location]);
-
-	return <div></div>;
+	// 设置id样式，避免页面底部内容往上显示闪烁
+	return <div id="redirect-container"></div>;
 };
 
 export default Redirect;
