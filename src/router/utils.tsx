@@ -42,11 +42,21 @@ export const formatRouter = menuList => {
 			path: r.path,
 			name: r.name,
 			element: <Component />,
-			children: r.children ? formatRouter(r.children) : []
+			children: r.children ? formatRouter(r.children) : [],
+			meta: {
+				icon: r.icon,
+				frameSrc: r.frameSrc,
+				external: r.external,
+				hideInMenu: r.hideInMenu,
+				hideInBread: r.hideInBread,
+				noCloseTab: r.noCloseTab,
+				sort: r.sort,
+				isNew: r.isNew
+			}
 		};
 
 		// 如果存在子路由且没有设置默认重定向，则添加默认重定向
-		if (rNew.children && rNew.children.length > 0) {
+		if (rNew?.children?.length > 0) {
 			rNew.children.unshift({
 				// path为空字符串，表示这个路由的路径与父路由的路径相同
 				path: '',

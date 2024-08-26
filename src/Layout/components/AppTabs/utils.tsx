@@ -1,3 +1,13 @@
+// 辅助函数，确保路径拼接时保留根路径且不出现多余的斜杠
+export const normalizePath = path => {
+	// 如果路径不以 / 开头，添加一个 / 作为前缀
+	if (!path.startsWith('/')) {
+		path = '/' + path;
+	}
+	// 使用 replace(/\/+/g, '/') 确保路径中不会有多余的斜杠
+	return path.replace(/\/+/g, '/');
+};
+
 /**
  * 根据路径获取路由项，并拼接父路由的路径
  * @param {Array} arr - 路由配置数组
@@ -10,16 +20,6 @@ export const getTabItem = (arr, queryPath, parentPath = '') => {
 
 	for (const item of arr) {
 		const { path, children, noCloseTab } = item;
-
-		// 辅助函数，确保路径拼接时保留根路径且不出现多余的斜杠
-		const normalizePath = path => {
-			// 如果路径不以 / 开头，添加一个 / 作为前缀
-			if (!path.startsWith('/')) {
-				path = '/' + path;
-			}
-			// 使用 replace(/\/+/g, '/') 确保路径中不会有多余的斜杠
-			return path.replace(/\/+/g, '/');
-		};
 
 		// 拼接当前路径与父路径
 		const fullPath = normalizePath(parentPath ? `${parentPath}/${path}` : path);

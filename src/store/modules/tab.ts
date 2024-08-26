@@ -50,7 +50,7 @@ const useTabStore = create<TabStore>((set, get) => ({
 	delOthersVisitedTabs: path => {
 		set(state => ({
 			visitedTabs: state.visitedTabs.filter(
-				route => route.meta.noCloseTab || route.path === path
+				route => route?.meta?.noCloseTab || route.path === path
 			)
 		}));
 	},
@@ -62,7 +62,7 @@ const useTabStore = create<TabStore>((set, get) => ({
 			return {
 				visitedTabs: state.visitedTabs.filter(route => {
 					if (route.path === path) found = true;
-					return route.meta.noCloseTab || found;
+					return route?.meta?.noCloseTab || found;
 				})
 			};
 		});
@@ -76,7 +76,7 @@ const useTabStore = create<TabStore>((set, get) => ({
 				visitedTabs: state.visitedTabs.filter(route => {
 					const close = found;
 					if (route.path === path) found = true;
-					return route.meta.noCloseTab || !close;
+					return route?.meta?.noCloseTab || !close;
 				})
 			};
 		});
@@ -85,7 +85,7 @@ const useTabStore = create<TabStore>((set, get) => ({
 	// 删除不可关闭标签页以外的全部标签页
 	delAllVisitedTabs: () => {
 		set(state => ({
-			visitedTabs: state.visitedTabs.filter(route => route.meta.noCloseTab)
+			visitedTabs: state.visitedTabs.filter(route => route?.meta?.noCloseTab)
 		}));
 	}
 }));

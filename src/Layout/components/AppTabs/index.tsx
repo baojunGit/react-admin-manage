@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Tabs } from 'antd';
-import { HomeFilled } from '@ant-design/icons';
 import { useMenuStore, useTabStore } from '@/store';
 import { getTabItem } from './utils';
 import MoreButton from './components/MoreButton';
@@ -13,13 +12,38 @@ const AppTabs = () => {
 	const visitedTabs = getVisitedTabs() || [];
 	const { pathname } = useLocation();
 
-	useEffect(() => {
-		console.log(menuList);
+	// 初始化固定无法关闭的页签
+	const initNoCLosableTabs = () => {
+		const noCloseTab = {
+			path: '/home',
+			name: '首页',
+			component: 'Home',
+			children: null,
+			meta: {
+				icon: '',
+				frameSrc: '',
+				external: false,
+				hideInMenu: false,
+				hideInBread: false,
+				noCloseTab: true,
+				sort: 1,
+				isNew: false
+			}
+		};
+		addVisitedTab(noCloseTab);
+	};
+
+	// 初始化固定当前页面的页签
+	const initPathTab = () => {
 		const currentPath = pathname.split('/').pop();
 		const item = getTabItem(menuList, currentPath);
 		const tab = { name: item?.name, path: item?.path };
-		console.log(tab);
 		addVisitedTab(tab);
+	};
+
+	useEffect(() => {
+		initNoCLosableTabs();
+		initPathTab();
 	}, [pathname]);
 
 	const navigate = useNavigate();
@@ -45,12 +69,7 @@ const AppTabs = () => {
 	// 使用 items 属性代替 TabPane
 	const tabItems = visitedTabs.map(item => ({
 		key: item.path,
-		label: (
-			<span>
-				{item.path === '/home' ? <HomeFilled /> : ''}
-				{item.name}
-			</span>
-		),
+		label: <span>{item.name}</span>,
 		closable: item.path !== '/home'
 	}));
 
