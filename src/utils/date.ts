@@ -30,7 +30,7 @@ export function recentlyFiveMonth() {
 		// 将循环出来的 年月 一次 存放进 result 数组中
 		result.push(d.getFullYear() + '-' + m);
 	}
-	console.log(result);
+	// console.log(result);
 	// 返回反向排列数组
 	return result.reverse();
 }

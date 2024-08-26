@@ -8,7 +8,7 @@ import Error404 from '@/views/error/Error404/index';
 import Error401 from '@/views/error/Error404/index';
 // layout布局组件不用懒加载，懒加载本身也会增加一些额外的开销
 import publicRoutes from './publicRoutes';
-import { formatRouter } from './util';
+import { formatRouter } from './utils';
 
 // 自定义 Hook
 // 获取菜单列表并生成路由配置

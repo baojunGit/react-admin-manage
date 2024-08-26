@@ -1,9 +1,4 @@
-import React, {
-	useEffect,
-	useRef,
-	forwardRef,
-	useImperativeHandle
-} from 'react';
+import { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 import * as echarts from 'echarts';
 
 interface PropsType {

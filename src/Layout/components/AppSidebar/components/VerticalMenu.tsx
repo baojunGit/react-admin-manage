@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Menu } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useMenuStore } from '@/store';
-import { formatMenu, getOpenKeys, getRouteItem } from './util';
+import { formatMenu, getOpenKeys, getRouteItem } from './utils';
 
 const VerticalMenu = () => {
 	const { menuList, collapse } = useMenuStore();

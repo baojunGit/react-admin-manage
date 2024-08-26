@@ -29,7 +29,7 @@ Object.values(flies).map((arr: MockType) => {
 	//   key表示每个引入的模块文件路径，如./login.js
 	//   获取组件配置
 	for (let i = 0; i < arr.length; i++) {
-		let el = arr[i];
+		const el = arr[i];
 		Mock.mock(RegExp(`${API_PREFIX}${el.url}.*`), el.method, el.template);
 	}
 });

@@ -1,5 +1,5 @@
 export { default as Hamburger } from './Hamburger';
-export { default as NavBreadcrumb } from './Breadcrumb';
+export { default as NavBreadcrumb } from './NavBreadcrumb';
 export { default as AppNotice } from './AppNotice';
 export { default as AppScreenFull } from './AppScreenFull';
 export { default as Language } from './Language';
