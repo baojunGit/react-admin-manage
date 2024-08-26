@@ -1,51 +1,54 @@
 .app-tabs {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  // 设置高度，让内容居中
-  .ant-tabs {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    .ant-tabs-nav {
-      margin: 0;
-      &::before {
-        border: none;
-      }
-      .ant-tabs-tab {
-        position: relative;
-        color: #ccc;
-        background: none;
-        border: none;
-        margin-right: 5px;
-        &::after {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0;
-          height: 2px;
-          content: '';
-          background: #409eff;
-          transition: $base-transition;
-        }
-        &-active {
-          background: #e8f4ff;
-          &::after {
-            width: 100%;
-          }
-        }
-        .ant-tabs-tab-remove {
-          .anticon-close {
-            &:hover {
-              background: #a8abb2;
-              border-radius: 50%;
-            }
-          }
-        }
-      }
-    }
-    .ant-tabs-content-holder {
-      flex: 0;
-    }
-  }
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	// 设置高度，让内容居中
+	.ant-tabs {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+    // 这里设置固定宽度比较简单
+		width: calc(100% - 40px);
+		box-sizing: border-box;
+		.ant-tabs-nav {
+			margin: 0;
+			&::before {
+				border: none;
+			}
+			.ant-tabs-tab {
+				position: relative;
+				color: #ccc;
+				background: none;
+				border: none;
+				margin-right: 5px;
+				&::after {
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					width: 0;
+					height: 2px;
+					content: '';
+					background: #409eff;
+					transition: $base-transition;
+				}
+				&-active {
+					background: #e8f4ff;
+					&::after {
+						width: 100%;
+					}
+				}
+				.ant-tabs-tab-remove {
+					.anticon-close {
+						&:hover {
+							background: #a8abb2;
+							border-radius: 50%;
+						}
+					}
+				}
+			}
+		}
+		.ant-tabs-content-holder {
+			flex: 0;
+		}
+	}
 }

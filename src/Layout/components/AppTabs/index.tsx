@@ -48,7 +48,6 @@ const AppTabs = () => {
 
 	const navigate = useNavigate();
 	const clickTab = (path: string) => {
-		console.log(path);
 		navigate(path);
 	};
 
