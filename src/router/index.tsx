@@ -1,4 +1,4 @@
-import { Navigate, createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Layout from '@/Layout';
 import { getMenuList } from '@/api/menu';
@@ -8,6 +8,7 @@ import Error404 from '@/views/error/Error404/index';
 import Error401 from '@/views/error/Error404/index';
 // layout布局组件不用懒加载，懒加载本身也会增加一些额外的开销
 import publicRoutes from './publicRoutes';
+import PrivateRoute from './PrivateRoute';
 import { formatRouter } from './utils';
 
 // 自定义 Hook
@@ -25,12 +26,25 @@ const useRouterInstance = () => {
 
 				const routes = [
 					...publicRoutes,
-					// 嵌套路由重定向, 在要实现重定向的一级路由声明两次element属性，一个代表当前路径所展示的页面，另一个表示重定向路径。
-					// to里面用/home和hom都可以，虽然结果一样，表示的意思不同
-					// 1.有斜杠 /：表示绝对路径，重定向到网站的根路径下的 /home
-					// 2.没有斜杠 /：表示相对路径，重定向到当前路径的基础上再加上 home
-					{ path: '/', element: <Navigate to="home" /> },
-					...dynamicRoutes,
+
+					// 嵌套路由重定向
+					// 方法1
+					// { path: '/', element: <Navigate to="home" /> },
+					// 方法2
+					// {
+					//     // index: true 指定了该路由规则是默认的索引路由。当用户访问根路径 / 时，将会匹配到该路由规则，并渲染指定的元素
+					//     index: true,
+					//     element: <Navigate replace to="/portal/home" />
+					// },
+					// 重定向路径中斜杠的含义：
+					// 1. 有斜杠 /：绝对路径，重定向到根路径下的 /home
+					// 2. 没有斜杠 /：相对路径，重定向到当前路径的基础上再加上 home
+
+					// 这里把element当成children另一种形式来用
+					...dynamicRoutes.map(route => ({
+						...route,
+						element: <PrivateRoute element={route.element} />
+					})),
 					{
 						path: 'redirect/*',
 						element: <Layout />,
