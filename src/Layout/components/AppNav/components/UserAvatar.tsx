@@ -1,7 +1,7 @@
 import { Menu, Dropdown, Modal } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import Cookies from 'js-cookie';
-import imgUrl from '@/assets/images/face.gif';
+import { faceGif } from '@/config/getImg';
 import { clearAllLocal, clearAllSession } from '@/utils/storage';
 
 const UserAvatar = () => {
@@ -70,7 +70,7 @@ const UserAvatar = () => {
 						height="30px"
 						alt="头像"
 						className="avatar"
-						src={imgUrl}
+						src={faceGif}
 					/>
 					<div className="name">
 						<span className="name-title"> 游客 </span>

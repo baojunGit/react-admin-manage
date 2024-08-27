@@ -1,7 +1,7 @@
 import { Card } from 'antd';
-import imgUrl from '@/assets/images/face.gif';
-import './index.scss';
+import { faceGif } from '@/config/getImg';
 import FlipClock from '@/components/FlipClock';
+import styles from './index.module.scss';
 
 const Home = () => {
 	const handleTip = () => {
@@ -23,22 +23,22 @@ const Home = () => {
 			}}
 		>
 			<div
-				className="box-card"
+				className={styles['box-card']}
 				style={{
 					display: 'flex',
 					width: '100%',
 					justifyContent: 'space-between'
 				}}
 			>
-				<div className="box-card-left">
+				<div className={styles['box-card-left']}>
 					<img
-						className="user-avatar"
+						className={styles['user-avatar']}
 						width="60px"
 						height="60px"
-						src={imgUrl}
+						src={faceGif}
 						alt="头像"
 					/>
-					<div className="card-left-tip">{handleTip()}</div>
+					<div className={styles['card-left-tip']}>{handleTip()}</div>
 				</div>
 				<FlipClock />
 			</div>
