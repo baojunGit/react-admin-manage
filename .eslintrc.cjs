@@ -11,6 +11,9 @@ module.exports = {
 	ignorePatterns: ['dist', '.eslintrc.cjs'],
 	parser: '@typescript-eslint/parser',
 	plugins: ['react-refresh', 'prettier'],
+	globals: {
+        __APP_INFO__: 'readonly' // 添加全局变量 __APP_INFO__
+    },
 	// 添加或覆盖规则配置
 	rules: {
 		'prettier/prettier': 'error', // 将 Prettier 错误显示为 ESLint 错误

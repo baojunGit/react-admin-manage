@@ -1,0 +1,15 @@
+.my-project {
+	.card-header {
+		font-weight: normal;
+		display: flex;
+		align-items: center;
+        column-gap: 6px;
+	}
+	.card-desc {
+		width: calc(100% - 80px);
+		margin-right: 44px;
+		font-size: 12px;
+		line-height: 20px;
+		color: #ffffff;
+	}
+}

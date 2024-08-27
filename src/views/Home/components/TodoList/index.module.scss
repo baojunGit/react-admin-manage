@@ -1,0 +1,48 @@
+.todo-list {
+	.card-header {
+        font-weight: normal;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+        .header-title {
+            display: flex;
+            align-items: center;
+        }
+        .header-set {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            span {
+                padding: 2px;
+                font-size: 14px;
+                cursor: pointer;
+                &:nth-of-type(1) {
+                    margin-right: 10px;
+                    color: #4caf50; /* Base color green */
+                }
+                &:nth-of-type(2) {
+                    color: #2196f3; /* Base color blue */
+                }
+            }
+        }
+	}
+
+	
+
+	
+
+	.operation {
+		float: right;
+        i {
+            margin-right: 10px;
+            font-size: 14px;
+            color: #2196f3; /* Base color blue */
+            cursor: pointer;
+        }
+	}
+
+	.todoItemDel {
+		color: #999;
+		text-decoration: line-through;
+	}
+}

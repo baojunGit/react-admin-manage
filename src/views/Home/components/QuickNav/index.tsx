@@ -1,6 +1,5 @@
 import { Card, Row, Col } from 'antd';
-import AppIcon from '@/components/MyIcon';
-import './index.scss';
+import styles from './index.module.scss';
 
 const QuickNav = () => {
 	const navList = [
@@ -36,28 +35,33 @@ const QuickNav = () => {
 		}
 	];
 	return (
-		<Card
-			title={
-				<div>
-					<AppIcon />
-					快捷导航
-				</div>
-			}
-			styles={{
-				body: { padding: 0 }
-			}}
-		>
-			<Row>
-				{navList.map(({ name, icon }, index) => (
-					<Col key={index} xl={8} lg={8} md={8} sm={12} xs={12}>
-						<div className="search-nav-item">
-							<i className={icon}></i>
-							{name}
-						</div>
-					</Col>
-				))}
-			</Row>
-		</Card>
+		<div className={styles['quick-nav']}>
+			<Card
+				title={
+					<div className={styles['card-header']}>
+						<i
+							className="iconfont icon-chaxun"
+							style={{ marginRight: '6px' }}
+						></i>
+						快捷导航
+					</div>
+				}
+				styles={{
+					body: { padding: 0 }
+				}}
+			>
+				<Row>
+					{navList.map(({ name, icon }, index) => (
+						<Col key={index} xl={8} lg={8} md={8} sm={12} xs={12}>
+							<div className={styles['search-nav-item']}>
+								<i className={icon}></i>
+								{name}
+							</div>
+						</Col>
+					))}
+				</Row>
+			</Card>
+		</div>
 	);
 };
 

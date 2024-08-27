@@ -1,0 +1,19 @@
+.my-colorful-card {
+    position: relative;
+    min-height: 120px;
+    cursor: pointer;
+    .header {
+      color: #ffffff;
+      border-bottom: 0;
+      margin-bottom: 32px;
+    }
+    .icon {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      font-size: 60px;
+      transform: rotate(15deg);
+      color: #ffffff;
+    }
+  }
+  
